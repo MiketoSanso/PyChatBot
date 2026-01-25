@@ -1,6 +1,7 @@
 import asyncio
 
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher, types, F
+from aiogram.enums import ContentType
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import LabeledPrice, PreCheckoutQuery
@@ -59,18 +60,21 @@ class Handlers:
         #trading
         self.dp.message.register(self.buy_tokens, Command("buy_tokens"))
         self.dp.pre_checkout_query.register(self.process_pre_checkout)
-        self.dp.message.register(self.process_successful_payment, content_types=types.ContentType.SUCCESSFUL_PAYMENT)
+        self.dp.message.register(self.process_successful_payment, F.content_type == ContentType.SUCCESSFUL_PAYMENT)
 
     async def start(self, message: types.Message):
         user_language = message.from_user.language_code
         data = UserData()
         data.language = user_language
         id = message.from_user.id
-        texts = self.return_texts_usecase.execute(id)
-
-        await message.answer(texts.start)
 
         await self.add_user_usecase.execute(id, data)
+
+        print("true")
+
+        #texts = self.return_texts_usecase.execute(id)
+
+        #await message.answer(texts.start)
 
     async def help(self, message: types.Message):
         id = message.from_user.id

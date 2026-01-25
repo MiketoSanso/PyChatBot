@@ -1,3 +1,5 @@
+import json
+
 from Scripts.Domain.Data.UserData import UserData
 from Scripts.Infrastructure.Database import Database
 
@@ -10,12 +12,16 @@ class UserRequests:
         user_data = self.get_user_data(id)
 
         if user_data is None:
-            return False
-        else:
+            user_data_json = json.dumps({"language": data.language})
+
             self.db.cursor.execute("INSERT INTO users "
                                    "(id, user_data) VALUES "
                                    "(%s, %s)",
-                                   (id, data))
+                                   (id, user_data_json))
+
+            self.db.conn.commit()
+        else:
+            return False
 
         return True
 

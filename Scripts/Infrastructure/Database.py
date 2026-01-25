@@ -7,9 +7,9 @@ class Database:
     def __init__(self):
         self.conn = psycopg2.connect(
             host="localhost",
-            dbname="test",
-            user="test",
-            password="",
+            dbname="postgres",
+            user="postgres",
+            password="123",
             port="5432"
         )
 
@@ -18,7 +18,9 @@ class Database:
         with self.conn.cursor() as cursor:
             cursor.execute("""
             CREATE TABLE IF NOT EXISTS users (
-                id BIGINIT PRIMARRY KEY,
-                user_data JSONB NOT NULL DEFAULT '{}'::JSONB,
+                id BIGSERIAL PRIMARY KEY,
+                user_data JSONB NOT NULL DEFAULT '{}'::JSONB
             )
             """)
+
+        self.conn.commit()
