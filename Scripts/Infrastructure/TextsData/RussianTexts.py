@@ -1,51 +1,69 @@
-from attr import dataclass
-
+from dataclasses import dataclass
 from Scripts.Domain.Interfaces.Texts import Texts
 
 
 @dataclass(frozen=True)
 class RussianTexts(Texts):
-    start = "Добро пожаловать в ChatAI! Бла-бла-бла."
-    help = ("Существующие команды:\n"
-            "/start"
-            "/help"
-            "/account"
-            "/change_language"
-            "/change_ai"
-            "/recreate_ai"
-            "/buy_ai_place"
-            "/buy_tokens")
+    start = ("<b>ChatAI</b>\n\n"
+             "Добро пожаловать в <b>ChatAI!</b>\n"
+             "Только в нашем боте ты сможешь создать <b>любое количество личностей</b> для своих ботов, прописать "
+             "<b>любое количество сюжетов</b> и вести общение, не теряя <b>старые диалоги</b>!\n\n"
+             "<b>Погрузись в мир фантазии вместе с AI!</b>")
+    help = ("<b>Существующие команды:</b>\n"
+            "<b>/start</b> - \n"
+            "<b>/help</b> - \n"
+            "<b>/account</b> - \n"
+            "<b>/change_language</b> - \n"
+            "<b>/change_ai</b> - \n"
+            "<b>/recreate_ai</b> - \n"
+            "<b>/buy_ai_place</b> - \n"
+            "<b>/buy_tokens</b> - \n")
 
-    get_number_ai = "Введите номер ai, настройки которого будем менять:"
-    get_name_ai = "Введите имя ai:"
-    get_prompt_ai = "Введите промпт (данные вашего чата, обстановку, и прочее):"
-    input_language_ai = "Выберите язык бота:"
-    ai_recreated = "AI создан успешно!"
+    get_number_ai = "Введите <b>номер ai</b>, настройки которого будем менять:"
+    get_name_ai = "Введите <b>имя</b> ai:"
+    get_prompt_ai = "Введите <b>промпт</b> (<b>данные</b> вашего чата, <b>обстановку</b>, и <b>прочее</b>):"
+    input_language_ai = "Выберите <b>язык</b> бота:"
+    ai_recreated = "AI создан <b>успешно</b>!"
 
-    get_number_ai_error = "Ошибка! Вы ввели число либо меньше 1, либо больше количества доступных ботов!"
-    get_prompt_ai_error = "Ошибка! В вашем промпте символов больше, чем X!" #TODO: Решить, сколько символов будет.
-    ai_recreated_error = "Произошла ошибка при пересоздании бота!"
+    get_number_ai_error = "Ошибка! Вы ввели число <b>либо меньше 1</b>, <b>либо больше количества доступных</b> ботов!"
+    get_prompt_ai_error = "Ошибка! В вашем промпте <b>символов больше, чем X</b>!"
+    ai_recreated_error = "Произошла <b>ошибка</b> при пересоздании бота!"
 
-    input_language_user = "Выберите язык:"
+    input_language_user = "<b>Выберите язык:</b>"
+    language_changed = "<b>Язык сменен на:</b>"
+
 
     successful_payment = ("✅ Платеж прошел успешно!\n"
                 "Ваша подписка активирована на 30 дней.\n"
-                f"Чек отправлен на")
-
-    word_tokens = "Токенов"
+                "Чек отправлен на")  # Убрал f-string, он здесь не нужен
 
     change_ai = "Введите номер вашего AI, которого хотите активировать:"
     change_ai_successful = "AI изменён!"
-    change_ai_error = ("Произошла ошибка при изменении AI!\n"
-                       "Возможные причины:\n\n"
-                       "1) Введённое число меньше 1.\n"
-                       "2) Введённое число больше количества доступных слотов.\n\n"
-                       "Попробуйте снова!")
+    change_ai_text_error = "Введён текст а не число! Попробуйте ещё раз!"
+    change_ai_error = ("Произошла <b>ошибка</b> при изменении AI!\n\n"
+                       "<b>Возможные причины:</b>\n"
+                       "<b>1)</b> Введённое число <b>меньше 1</b>.\n"
+                       "<b>2)</b> Введённое число <b>больше количества доступных слотов</b>.\n\n"
+                       "Попробуйте <b>снова</b>!")
 
-    transaction_tokens_title = "Токены"
-    transaction_tokens_description = "Покупка токенов для работы AI",
+    transaction_tokens_title = "<b>Токены</b>"
+    transaction_tokens_description = "Покупка токенов для работы AI"
 
-    language_button_ru = "Русский"
-    language_button_chi = "Китайский"
-    language_button_eng = "Английский"
-    language_button_ger = "Немецкий"
+    language_bold_ru = "<b>Русский</b>"
+    language_bold_chi = "<b>Китайский</b>"
+    language_bold_eng = "<b>Английский</b>"
+    language_bold_de = "<b>Немецкий</b>"
+
+    language_ru = "Русский"
+    language_chi = "Китайский"
+    language_eng = "Английский"
+    language_de = "Немецкий"
+
+    word_tokens = "Токенов"
+
+    bold_word_tokens = "<b>Токенов</b>"
+    account_word = "<b>АККАУНТ</b>"
+    count_bot_slots = "<b>Количество слотов для ботов</b>"
+    language_word = "<b>Язык</b>"
+    active_ai_text = "<b>Номер активного ИИ</b>"
+    post_parameters_account = ""

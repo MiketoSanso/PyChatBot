@@ -1,8 +1,8 @@
 import enum
 
-@enum.unique
-class Languages(enum.Enum):
-    eng = 0,
-    rus = 1,
-    chi = 2,
-    ger = 3,
+class Languages(enum.IntEnum):
+    eng = 0
+    rus = 1
+    chi = 2
+    de = 3
+

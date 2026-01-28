@@ -9,7 +9,10 @@ class Texts(ABC):
             "ai_recreated_error", "successful_payment",
             "word_tokens", "transaction_tokens_title", "transaction_tokens_description",
             "get_name_ai", "change_ai", "change_ai_successful", "change_ai_error",
-            "language_button_ru", "language_button_chi", "language_button_eng", "language_button_ger"
+            "language_ru", "language_chi", "language_eng", "language_de",
+            "language_bold_ru", "language_bold_eng", "language_bold_chi", "language_bold_de",
+            "bold_word_tokens", "account_word", "count_bot_slots", "language_word", "active_ai_text",
+            "post_parameters_account", "change_ai_text_error", "language_changed"
         ]
         for attribute in attributes:
             if not hasattr(cls, attribute):

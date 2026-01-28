@@ -14,12 +14,12 @@ class ReturnTextsUseCase:
         language = data.language
 
         if language == Languages.eng:
-            return RussianTexts
+            return RussianTexts()
         elif language == Languages.rus:
-            return RussianTexts
+            return RussianTexts()
         elif language == Languages.chi:
-            return RussianTexts
-        elif language == Languages.ger:
-            return RussianTexts
+            return RussianTexts()
+        elif language == Languages.de:
+            return RussianTexts()
 
         return None
