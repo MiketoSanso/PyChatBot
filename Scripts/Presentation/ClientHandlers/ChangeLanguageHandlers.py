@@ -2,8 +2,9 @@ import asyncio
 
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.enums import ContentType, ParseMode
-from aiogram.filters import Command
+from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
+from aiogram.fsm.state import default_state
 from aiogram.types import LabeledPrice, PreCheckoutQuery
 
 from Scripts.Application.UseCases.AddUserUseCase import AddUserUseCase
@@ -39,10 +40,10 @@ class ChangeLanguageHandlers:
     def register_handlers(self, dp: Dispatcher):
         dp.message.register(self.change_language, Command("change_language"))
 
-        dp.callback_query.register(self.input_russian, F.data == str(Languages.rus))
-        dp.callback_query.register(self.input_english, F.data == str(Languages.eng))
-        dp.callback_query.register(self.input_china, F.data == str(Languages.chi))
-        dp.callback_query.register(self.input_deutsch, F.data == str(Languages.de))
+        dp.callback_query.register(self.input_russian, F.data == str(Languages.rus), StateFilter(default_state))
+        dp.callback_query.register(self.input_english, F.data == str(Languages.eng), StateFilter(default_state))
+        dp.callback_query.register(self.input_china, F.data == str(Languages.chi), StateFilter(default_state))
+        dp.callback_query.register(self.input_deutsch, F.data == str(Languages.de), StateFilter(default_state))
 
     async def change_language(self, message: types.Message):
         id = message.from_user.id

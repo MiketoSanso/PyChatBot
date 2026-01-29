@@ -39,6 +39,8 @@ class ShopHandlers:
 
     def register_handlers(self, dp: Dispatcher):
         dp.message.register(self.buy_tokens, Command("buy_tokens"))
+        dp.message.register(self.buy_ai_place, Command("buy_ai_place"))
+
         dp.pre_checkout_query.register(self.process_pre_checkout)
         dp.message.register(self.process_successful_payment, F.content_type == ContentType.SUCCESSFUL_PAYMENT)
 

@@ -27,4 +27,24 @@ class HandlersRegistrator:
         asyncio.run(self.start_bot())
 
     async def start_bot(self):
+        await self.register_keyboard()
         await self.dp.start_polling(self.bot)
+
+
+    async def register_keyboard(self):
+        commands = [
+            types.BotCommand(command="/start", description="Запустить бота"),
+            types.BotCommand(command="/help", description="Помощь"),
+            types.BotCommand(command="/account", description="Аккаунт"),
+            types.BotCommand(command="/change_language", description="Изменить язык"),
+
+            types.BotCommand(command="/buy_tokens", description="Купить токены"),
+            types.BotCommand(command="/buy_ai_place", description="Купить место под новый AI"),
+            types.BotCommand(command="/recreate_ai", description="Пересоздать AI"),
+            types.BotCommand(command="/change_ai", description="Сменить активный AI"),
+        ]
+
+        await self.bot.set_my_commands(
+            commands=commands,
+            scope=types.BotCommandScopeDefault()
+        )
