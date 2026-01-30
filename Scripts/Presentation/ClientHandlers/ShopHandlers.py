@@ -16,6 +16,7 @@ from Scripts.Domain.Data.Languages import Languages
 from Scripts.Domain.Data.UserData import UserData
 from Scripts.Domain.States.ChangeAiStates import ChangeAiStates
 from Scripts.Domain.States.CreatingAiStates import CreatingAiStates
+from Scripts.Infrastructure.TechData.Constants import Constants
 
 
 class ShopHandlers:
@@ -27,8 +28,9 @@ class ShopHandlers:
                  recreate_ai_usecase: RecreateAiUseCase,
                  logging_access_payment_usecase: LoggingAccessPaymentUseCase,
                  return_texts_usecase: ReturnTextsUseCase,
-                 get_user_data_usecase: GetUserDataUseCase):
-
+                 get_user_data_usecase: GetUserDataUseCase,
+                 constants: Constants):
+        self.constants = constants
         self.get_user_data_usecase = get_user_data_usecase
         self.add_user_usecase = add_user_usecase
         self.change_ai_usecase = change_ai_usecase
@@ -75,14 +77,13 @@ class ShopHandlers:
             LabeledPrice(label=f"200000 {texts.word_tokens}", amount=2500_000),
         ]
 
-        TOKEN_PAYMENTS = "1744374395:TEST:e1139428288af4683452"
 
         await self.bot.send_invoice(
             chat_id=message.chat.id,
             title=texts.transaction_tokens_title,
             description=texts.transaction_tokens_description,
             payload="Tockens",
-            provider_token=TOKEN_PAYMENTS,
+            provider_token=self.constants.TOKEN_PAYMENTS,
             currency="RUB",
             prices=prices,
             start_parameter="premium_sub",

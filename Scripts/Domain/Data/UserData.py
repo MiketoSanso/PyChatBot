@@ -1,5 +1,5 @@
-from dataclasses import dataclass, field
-from typing import List, Any
+from dataclasses import dataclass
+from Scripts.Domain.Data.AiData import AiData
 from Scripts.Domain.Data.Languages import Languages
 
 
@@ -9,7 +9,7 @@ class UserData:
     tokens: int = 10000
     count_ai: int = 1
     language: Languages = Languages.eng
-    ai_data: List[Any] = field(default_factory=list)
+    ai_data: AiData = AiData()
 
     @classmethod
     def from_dict(cls, data: dict):
@@ -17,7 +17,7 @@ class UserData:
         tokens_value = data.get("tokens", 0)
         count_ai_value = data.get("count_ai", 1)
         language_value = Languages(data.get("language", 0))
-        ai_data_value = data.get("ai_data", [])
+        ai_data_value = data.get("ai_data", AiData())
 
         return cls(active_ai=active_ai_value,
                    tokens = tokens_value,
@@ -31,5 +31,5 @@ class UserData:
             "tokens": self.tokens,
             "count_ai": self.count_ai,
             "language": self.language.value,
-            "ai_data": self.ai_data
+            "ai_data": self.ai_data.to_dict()
         }

@@ -5,9 +5,11 @@ from Scripts.Application.UseCases.GetUserDataUseCase import GetUserDataUseCase
 from Scripts.Application.UseCases.LoggingAccessPaymentUseCase import LoggingAccessPaymentUseCase
 from Scripts.Application.UseCases.RecreateAiUseCase import RecreateAiUseCase
 from Scripts.Application.UseCases.ReturnTextsUseCase import ReturnTextsUseCase
+from Scripts.Application.UseCases.SendUserMessageUseCase import SendUserMessageUseCase
 from Scripts.Infrastructure.Database import Database
 from Scripts.Infrastructure.PostgresSQLDatabase.UserRequests import UserRequests
 from Scripts.Infrastructure.Services.Logger import Logger
+from Scripts.Infrastructure.TechData.Constants import Constants
 from Scripts.Presentation.ClientHandlers.BaseHandlers import BaseHandlers
 from Scripts.Presentation.ClientHandlers.ChangeLanguageHandlers import ChangeLanguageHandlers
 from Scripts.Presentation.ClientHandlers.RecreateAiHandlers import RecreateAiHandlers
@@ -28,6 +30,7 @@ class Dependencies:
 
     def __initialize_requests(self):
         db = Database()
+        self.constants = Constants()
         self.user_requests = UserRequests(db)
 
     def __initialize_handlers(self):
@@ -37,7 +40,8 @@ class Dependencies:
                                  self.recreate_ai_usecase,
                                  self.logging_acces_payment_usecase,
                                  self.return_texts_usecase,
-                                 self.get_user_data_usecase)
+                                 self.get_user_data_usecase,
+                                 self.constants)
         self.change_language_handlers = ChangeLanguageHandlers(self.add_user_usecase,
                                  self.change_ai_usecase,
                                  self.change_user_language_usecase,
@@ -51,7 +55,8 @@ class Dependencies:
                                  self.recreate_ai_usecase,
                                  self.logging_acces_payment_usecase,
                                  self.return_texts_usecase,
-                                 self.get_user_data_usecase)
+                                 self.get_user_data_usecase,
+                                 self.send_user_message_usecase)
         self.recreate_ai_handlers = RecreateAiHandlers(self.add_user_usecase,
                                  self.change_ai_usecase,
                                  self.change_user_language_usecase,
@@ -59,7 +64,8 @@ class Dependencies:
                                  self.logging_acces_payment_usecase,
                                  self.return_texts_usecase,
                                  self.get_user_data_usecase)
-        self.handler_registrator = HandlersRegistrator(self.base_handlers,
+        self.handler_registrator = HandlersRegistrator(self.constants,
+                                                       self.base_handlers,
                                                        self.change_language_handlers,
                                                        self.recreate_ai_handlers,
                                                        self.shop_handlers)
@@ -73,3 +79,4 @@ class Dependencies:
         self.logging_acces_payment_usecase = LoggingAccessPaymentUseCase(self.logger)
         self.return_texts_usecase = ReturnTextsUseCase(self.user_requests)
         self.get_user_data_usecase = GetUserDataUseCase(self.user_requests)
+        self.send_user_message_usecase = SendUserMessageUseCase(self.user_requests, self.constants)

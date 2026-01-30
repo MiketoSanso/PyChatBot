@@ -2,7 +2,7 @@ import asyncio
 
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.enums import ContentType, ParseMode
-from aiogram.filters import Command
+from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import LabeledPrice, PreCheckoutQuery
 
@@ -13,6 +13,7 @@ from Scripts.Application.UseCases.GetUserDataUseCase import GetUserDataUseCase
 from Scripts.Application.UseCases.LoggingAccessPaymentUseCase import LoggingAccessPaymentUseCase
 from Scripts.Application.UseCases.RecreateAiUseCase import RecreateAiUseCase
 from Scripts.Application.UseCases.ReturnTextsUseCase import ReturnTextsUseCase
+from Scripts.Application.UseCases.SendUserMessageUseCase import SendUserMessageUseCase
 from Scripts.Domain.Data.AiData import AiData
 from Scripts.Domain.Data.Languages import Languages
 from Scripts.Domain.Data.UserData import UserData
@@ -29,8 +30,10 @@ class BaseHandlers:
                  recreate_ai_usecase: RecreateAiUseCase,
                  logging_access_payment_usecase: LoggingAccessPaymentUseCase,
                  return_texts_usecase: ReturnTextsUseCase,
-                 get_user_data_usecase: GetUserDataUseCase):
+                 get_user_data_usecase: GetUserDataUseCase,
+                 send_user_message_usecase: SendUserMessageUseCase):
 
+        self.send_user_message_usecase = send_user_message_usecase
         self.get_user_data_usecase = get_user_data_usecase
         self.add_user_usecase = add_user_usecase
         self.change_ai_usecase = change_ai_usecase
@@ -46,6 +49,10 @@ class BaseHandlers:
         dp.message.register(self.start_change_ai, Command("change_ai"))
 
         dp.message.register(self.change_ai, ChangeAiStates.change_ai)
+
+        dp.message.register(self.send_message, F.text,
+                    ~F.text.startswith("/"),
+                    StateFilter("default"))
 
     async def start(self, message: types.Message):
         user_language = message.from_user.language_code
@@ -122,3 +129,8 @@ class BaseHandlers:
             await message.answer(texts.change_ai_error, parse_mode=ParseMode.HTML)
 
         await state.clear()
+
+    async def send_message(self, message: types.Message):
+        id = message.from_user.id
+        answer = await self.send_user_message_usecase.execute(id, message.text)
+        await message.answer(answer)
