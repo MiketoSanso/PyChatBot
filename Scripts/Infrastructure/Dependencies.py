@@ -34,16 +34,14 @@ class Dependencies:
         self.user_requests = UserRequests(db)
 
     def __initialize_handlers(self):
-        self.shop_handlers = ShopHandlers(self.add_user_usecase,
-                                 self.change_ai_usecase,
+        self.shop_handlers = ShopHandlers(self.change_ai_usecase,
                                  self.change_user_language_usecase,
                                  self.recreate_ai_usecase,
                                  self.logging_acces_payment_usecase,
                                  self.return_texts_usecase,
                                  self.get_user_data_usecase,
                                  self.constants)
-        self.change_language_handlers = ChangeLanguageHandlers(self.add_user_usecase,
-                                 self.change_ai_usecase,
+        self.change_language_handlers = ChangeLanguageHandlers(self.change_ai_usecase,
                                  self.change_user_language_usecase,
                                  self.recreate_ai_usecase,
                                  self.logging_acces_payment_usecase,
@@ -57,8 +55,7 @@ class Dependencies:
                                  self.return_texts_usecase,
                                  self.get_user_data_usecase,
                                  self.send_user_message_usecase)
-        self.recreate_ai_handlers = RecreateAiHandlers(self.add_user_usecase,
-                                 self.change_ai_usecase,
+        self.recreate_ai_handlers = RecreateAiHandlers(self.change_ai_usecase,
                                  self.change_user_language_usecase,
                                  self.recreate_ai_usecase,
                                  self.logging_acces_payment_usecase,

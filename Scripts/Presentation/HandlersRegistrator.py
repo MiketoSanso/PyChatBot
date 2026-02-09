@@ -20,6 +20,7 @@ class HandlersRegistrator:
         self.bot = Bot(constants.BOT_TOKEN)
         self.dp = Dispatcher()
 
+
         base_handlers.register_handlers(self.dp)
         change_language_handlers.register_handlers(self.dp)
         recreate_ai_handlers.register_handlers(self.dp)
@@ -30,6 +31,8 @@ class HandlersRegistrator:
     async def start_bot(self):
         await self.register_keyboard()
         await self.dp.start_polling(self.bot)
+        await self.dp.fsm.storage.state.clear()
+
 
 
     async def register_keyboard(self):

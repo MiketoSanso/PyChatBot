@@ -10,14 +10,14 @@ class RussianTexts(Texts):
              "<b>любое количество сюжетов</b> и вести общение, не теряя <b>старые диалоги</b>!\n\n"
              "<b>Погрузись в мир фантазии вместе с AI!</b>")
     help = ("<b>Существующие команды:</b>\n"
-            "<b>/start</b> - \n"
-            "<b>/help</b> - \n"
-            "<b>/account</b> - \n"
-            "<b>/change_language</b> - \n"
-            "<b>/change_ai</b> - \n"
-            "<b>/recreate_ai</b> - \n"
-            "<b>/buy_ai_place</b> - \n"
-            "<b>/buy_tokens</b> - \n")
+            "<b>/start</b> - Перезапустить бота.\n"
+            "<b>/help</b> - Посмотреть все возможные команды.\n"
+            "<b>/account</b> - Посмотреть аккаунт.\n"
+            "<b>/change_language</b> - Сменить язык.\n"
+            "<b>/change_ai</b> - Сменить активный AI.\n"
+            "<b>/recreate_ai</b> - Пересоздать AI.\n"
+            "<b>/buy_ai_place</b> - Купить новую ячейку под новый диалог с AI\n"
+            "<b>/buy_tokens</b> - Купить токены для общения.\n")
 
     get_number_ai = "Введите <b>номер ai</b>, настройки которого будем менять:"
     get_name_ai = "Введите <b>имя</b> ai:"

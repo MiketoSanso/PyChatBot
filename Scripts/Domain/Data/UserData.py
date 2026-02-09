@@ -17,7 +17,8 @@ class UserData:
         tokens_value = data.get("tokens", 0)
         count_ai_value = data.get("count_ai", 1)
         language_value = Languages(data.get("language", 0))
-        ai_data_value = data.get("ai_data", AiData())
+        ai_data_value = data.get("ai_data", {})
+        ai_data_value = AiData.from_dict(ai_data_value)
 
         return cls(active_ai=active_ai_value,
                    tokens = tokens_value,

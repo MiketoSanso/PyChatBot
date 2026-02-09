@@ -5,9 +5,7 @@ from aiogram.enums import ContentType, ParseMode
 from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import default_state
-from aiogram.types import LabeledPrice, PreCheckoutQuery
 
-from Scripts.Application.UseCases.AddUserUseCase import AddUserUseCase
 from Scripts.Application.UseCases.ChangeAiUseCase import ChangeAiUseCase
 from Scripts.Application.UseCases.ChangeUserLanguageUseCase import ChangeUserLanguageUseCase
 from Scripts.Application.UseCases.GetUserDataUseCase import GetUserDataUseCase
@@ -21,7 +19,6 @@ from Scripts.Domain.Data.Languages import Languages
 class ChangeLanguageHandlers:
 
     def __init__(self,
-                 add_user_usecase: AddUserUseCase,
                  change_ai_usecase: ChangeAiUseCase,
                  change_user_language_usecase: ChangeUserLanguageUseCase,
                  recreate_ai_usecase: RecreateAiUseCase,
@@ -30,7 +27,6 @@ class ChangeLanguageHandlers:
                  get_user_data_usecase: GetUserDataUseCase):
 
         self.get_user_data_usecase = get_user_data_usecase
-        self.add_user_usecase = add_user_usecase
         self.change_ai_usecase = change_ai_usecase
         self.change_user_language_usecase = change_user_language_usecase
         self.recreate_ai_usecase = recreate_ai_usecase
@@ -94,5 +90,6 @@ class ChangeLanguageHandlers:
         except:
             await callback_query.message.answer(
                 text=f"{texts.language_changed} {language}",
+
                 parse_mode=ParseMode.HTML
             )

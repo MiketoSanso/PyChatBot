@@ -1,28 +1,20 @@
 from aiogram import Dispatcher, F, types
 from aiogram.enums import ContentType, ParseMode
 from aiogram.filters import Command
-from aiogram.fsm.context import FSMContext
 from aiogram.types import LabeledPrice, PreCheckoutQuery
 
-from Scripts.Application.UseCases.AddUserUseCase import AddUserUseCase
 from Scripts.Application.UseCases.ChangeAiUseCase import ChangeAiUseCase
 from Scripts.Application.UseCases.ChangeUserLanguageUseCase import ChangeUserLanguageUseCase
 from Scripts.Application.UseCases.GetUserDataUseCase import GetUserDataUseCase
 from Scripts.Application.UseCases.LoggingAccessPaymentUseCase import LoggingAccessPaymentUseCase
 from Scripts.Application.UseCases.RecreateAiUseCase import RecreateAiUseCase
 from Scripts.Application.UseCases.ReturnTextsUseCase import ReturnTextsUseCase
-from Scripts.Domain.Data.AiData import AiData
-from Scripts.Domain.Data.Languages import Languages
-from Scripts.Domain.Data.UserData import UserData
-from Scripts.Domain.States.ChangeAiStates import ChangeAiStates
-from Scripts.Domain.States.CreatingAiStates import CreatingAiStates
 from Scripts.Infrastructure.TechData.Constants import Constants
 
 
 class ShopHandlers:
 
     def __init__(self,
-                 add_user_usecase: AddUserUseCase,
                  change_ai_usecase: ChangeAiUseCase,
                  change_user_language_usecase: ChangeUserLanguageUseCase,
                  recreate_ai_usecase: RecreateAiUseCase,
@@ -32,7 +24,6 @@ class ShopHandlers:
                  constants: Constants):
         self.constants = constants
         self.get_user_data_usecase = get_user_data_usecase
-        self.add_user_usecase = add_user_usecase
         self.change_ai_usecase = change_ai_usecase
         self.change_user_language_usecase = change_user_language_usecase
         self.recreate_ai_usecase = recreate_ai_usecase
