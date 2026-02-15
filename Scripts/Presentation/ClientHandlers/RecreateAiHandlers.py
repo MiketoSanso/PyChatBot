@@ -113,11 +113,9 @@ class RecreateAiHandlers:
         texts = self.return_texts_usecase.execute(id)
         callback_data = callback_query.data
 
-        print(callback_data)
-
         ai_data = AiData()
         ai_data.prompt = data["prompt"]
-        ai_data.language = Languages(callback_data)
+        ai_data.language = Languages(int(callback_data))
 
         is_recreated = self.recreate_ai_usecase.execute(id, ai_data)
 
@@ -125,8 +123,8 @@ class RecreateAiHandlers:
 
 
         if is_recreated:
-            await callback_query.answer(texts.ai_recreated, parse_mode=ParseMode.HTML)
+            await callback_query.message.edit_text(texts.ai_recreated, parse_mode=ParseMode.HTML)
         else:
-            await callback_query.answer(texts.ai_recreated_error, parse_mode=ParseMode.HTML)
+            await callback_query.message.edit_text(texts.ai_recreated_error, parse_mode=ParseMode.HTML)
 
         await state.clear()

@@ -6,8 +6,8 @@ class Texts(ABC):
         attributes = [
             "start", "help", "get_number_ai", "get_prompt_ai", "input_language_ai",
             "ai_recreated", "get_number_ai_error", "get_prompt_ai_error",
-            "ai_recreated_error", "successful_payment",
-            "word_tokens", "transaction_tokens_title", "transaction_tokens_description",
+            "ai_recreated_error", "successful_payment_tokens", "successful_payment_tokens_without_mail",
+            "word_tokens", "word_cell", "transaction_tokens_title", "transaction_tokens_description",
             "get_name_ai", "change_ai", "change_ai_successful", "change_ai_error",
             "language_ru", "language_chi", "language_eng", "language_de",
             "language_bold_ru", "language_bold_eng", "language_bold_chi", "language_bold_de",

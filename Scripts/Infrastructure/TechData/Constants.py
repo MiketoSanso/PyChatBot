@@ -1,7 +1,9 @@
 class Constants:
     def __init__(self):
         self.BOT_TOKEN = "8588091640:AAGz9_NJxTciE7MszsJRccWq109ULyrJET8"
-        self.TOKEN_PAYMENTS = "1744374395:TEST:e1139428288af4683452"
+        self.PAYMENTS = "1744374395:TEST:e1139428288af4683452"
+
+        self.COUNT_CHARS_BY_TOKEN = 3
 
         self.MAX_CHARS_AI = 1000000
         self.MAX_COUNT_MESSAGES = 100

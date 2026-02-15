@@ -1,3 +1,5 @@
+from Scripts.Application.UseCases.AddAiPlaceUseCase import AddAiPlaceUseCase
+from Scripts.Application.UseCases.AddTokensUseCase import AddTokensUseCase
 from Scripts.Application.UseCases.AddUserUseCase import AddUserUseCase
 from Scripts.Application.UseCases.ChangeAiUseCase import ChangeAiUseCase
 from Scripts.Application.UseCases.ChangeUserLanguageUseCase import ChangeUserLanguageUseCase
@@ -40,6 +42,8 @@ class Dependencies:
                                  self.logging_acces_payment_usecase,
                                  self.return_texts_usecase,
                                  self.get_user_data_usecase,
+                                 self.add_tockens_usecase,
+                                 self.add_ai_place_usecase,
                                  self.constants)
         self.change_language_handlers = ChangeLanguageHandlers(self.change_ai_usecase,
                                  self.change_user_language_usecase,
@@ -77,3 +81,5 @@ class Dependencies:
         self.return_texts_usecase = ReturnTextsUseCase(self.user_requests)
         self.get_user_data_usecase = GetUserDataUseCase(self.user_requests)
         self.send_user_message_usecase = SendUserMessageUseCase(self.user_requests, self.constants)
+        self.add_tockens_usecase = AddTokensUseCase(self.user_requests)
+        self.add_ai_place_usecase =  AddAiPlaceUseCase(self.user_requests)

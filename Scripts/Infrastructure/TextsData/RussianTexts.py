@@ -33,9 +33,12 @@ class RussianTexts(Texts):
     language_changed = "<b>Язык сменен на:</b>"
 
 
-    successful_payment = ("✅ Платеж прошел успешно!\n"
-                "Ваша подписка активирована на 30 дней.\n"
-                "Чек отправлен на")  # Убрал f-string, он здесь не нужен
+    successful_payment_tokens = ("✅ Платеж прошел успешно!\n"
+                "Токены зачислены на счёт.\n"
+                "Чек отправлен на")
+
+    successful_payment_tokens_without_mail = ("✅ Платеж прошел успешно!\n"
+                                 "Токены зачислены на счёт.")
 
     change_ai = "Введите номер вашего AI, которого хотите активировать:"
     change_ai_successful = "AI изменён!"
@@ -46,7 +49,11 @@ class RussianTexts(Texts):
                        "<b>2)</b> Введённое число <b>больше количества доступных слотов</b>.\n\n"
                        "Попробуйте <b>снова</b>!")
 
-    transaction_tokens_title = "<b>Токены</b>"
+    transaction_tokens_title = "Токены"
+    description_tokens = "Покупка токенов, количество:"
+
+    description_ai_cell = f"Покупка новой ячейки AI"
+    transaction_ai_cell_title = "Ячейка"
     transaction_tokens_description = "Покупка токенов для работы AI"
 
     language_bold_ru = "<b>Русский</b>"
@@ -60,6 +67,7 @@ class RussianTexts(Texts):
     language_de = "Немецкий"
 
     word_tokens = "Токенов"
+    word_cell = "Ячейка"
 
     bold_word_tokens = "<b>Токенов</b>"
     account_word = "<b>АККАУНТ</b>"
